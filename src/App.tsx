@@ -28,6 +28,14 @@ function App() {
     setTasks(filteredTasks);
   }
 
+  const changeBox = ( idTask:string, value:boolean)=>{
+    let task= tasks.find(el=> el.id===idTask);
+    if(task){
+      task.isDone=value;
+      setTasks([...tasks])
+    }
+  }
+
   let [filter, setFilter] = useState<FilterValuesType>("all");
 
   let tasksForTodolist = tasks;
@@ -50,6 +58,7 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeBox={changeBox}
       />
     </div>
   );

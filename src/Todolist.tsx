@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
+import {CheckBox} from './Components/checkBox';
 
 type TaskType = {
   id: string
@@ -13,6 +14,7 @@ type PropsType = {
   removeTask: (taskId: string) => void
   changeFilter: (value: FilterValuesType) => void
   addTask: (title: string) => void
+  changeBox:(idTask:string, value:boolean)=>void
 }
 
 
@@ -39,6 +41,10 @@ export function Todolist(props: PropsType) {
   const onActiveClickHandler = ()=> props.changeFilter("active")
   const onCompletedClickHandler = ()=> props.changeFilter("completed")
 
+  const onChangeBoxHandler =(tID:string, eValue:boolean)=>{
+    props.changeBox(tID, eValue)
+  }
+  const onRemoveHandler = (tID:string)=> {props.removeTask(tID)}
   return (
     <div>
       <h3>{props.title}</h3>
@@ -53,12 +59,17 @@ export function Todolist(props: PropsType) {
       <ul>
         {
           props.tasks.map(t => {
-            const onRemoveHandler = ()=> {props.removeTask(t.id)}
+
             return(
               <li key={t.id}>
-              <input type="checkbox" checked={t.isDone}/>
+                <CheckBox
+                  checked={t.isDone}
+                  callBack={(eValue)=>onChangeBoxHandler(t.id,eValue )}
+
+                />
+
               <span>{t.title}</span>
-              <button onClick={onRemoveHandler}>x
+              <button onClick={()=>onRemoveHandler(t.id)}>x
               </button>
             </li>
             )})

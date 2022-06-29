@@ -17,8 +17,17 @@ function App() {
 
   ]);
 
+  const changeCheckBox=(idTask:string,eValue:boolean)=>{
+    // let task= tasks.find(el=> el.id===id)
+    // if(task){
+    //   task.isDone=eValue
+    //   setTasks([...tasks])
+    // }
+    setTasks(tasks.map(el=>el.id===idTask ? {...el,isDone: eValue} : el))
+  }
+
   const addTask = (title:string) => {
-    let task = {id: v1(), title: title, isDone: true};
+    let task = {id: v1(), title: title, isDone: false};
     let NewTask = [task, ...tasks];
     setTasks(NewTask)
   }
@@ -50,6 +59,7 @@ function App() {
                 removeTask={removeTask}
                 changeFilter={changeFilter}
                 addTask={addTask}
+                changeCheckBox={changeCheckBox}
 
       />
     </div>

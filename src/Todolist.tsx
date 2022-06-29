@@ -23,8 +23,10 @@ export function Todolist(props: PropsType) {
   let [newTitle, setTitle] = useState('')
 
   const addTask = () => {
-    props.addTask(newTitle)
-    setTitle('')
+    if(newTitle.trim()){
+      props.addTask(newTitle.trim())
+      setTitle('')
+    }
   }
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {

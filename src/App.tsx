@@ -59,6 +59,7 @@ function App() {
                 changeFilter={changeFilter}
                 addTask={addTask}
                 changeBox={changeBox}
+                filter={filter}
       />
     </div>
   );

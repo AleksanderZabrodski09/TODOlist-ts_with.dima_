@@ -45,12 +45,13 @@ function App() {
   function changeFilter(value: FilterValuesType, todolistId:string) {
     let todoList = todoLists.find(tl=>tl.id===todolistId)
     if(todoList){
-      setTodolists([...todoLists])
+      todoList.filter=value
+      setTodoLists([...todoLists])
     }
     // setFilter(value);
   }
 
-  let [todoLists, setTodolists] = useState<Array<TodoListsType>>([
+  let [todoLists, setTodoLists] = useState<Array<TodoListsType>>([
     {id: v1(), title: "What to learn", filter: 'active'},
     {id: v1(), title: "What to buy", filter: 'completed'},
   ])
@@ -77,7 +78,6 @@ function App() {
             addTask={addTask}
             changeCheckBox={changeCheckBox}
             filter={tl.filter}
-
           />
         })
       }

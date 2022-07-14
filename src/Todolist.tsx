@@ -3,7 +3,7 @@ import {FilterValuesType} from './App';
 import {CheckBox} from './Components/CheckBox';
 
 
-type TaskType = {
+export type TaskType = {
   id: string
   title: string
   isDone: boolean

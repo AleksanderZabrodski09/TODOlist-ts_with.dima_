@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
+import {AddItemForm} from './AddItemForm';
+import {type} from 'os';
 
 export type FilterValuesType = "all" | "active" | "completed";
 type TodoListsType = {
@@ -10,20 +12,11 @@ type TodoListsType = {
   filter: FilterValuesType
 }
 
-type TasksObjType ={
-  [key:string]:Array<TaskType>
+type TasksObjType = {
+  [key: string]: Array<TaskType>
 }
 
 function App() {
-
-  // let [tasks, setTasks] = useState([
-  //   {id: v1(), title: "HTML&CSS", isDone: true},
-  //   {id: v1(), title: "JS", isDone: true},
-  //   {id: v1(), title: "ReactJS", isDone: false},
-  //   {id: v1(), title: "Rest API", isDone: false},
-  //   {id: v1(), title: "GraphQL", isDone: false},
-  // ]);
-
 
   const addTask = (title: string, todoListId: string) => {
     let newTask = {id: v1(), title: title, isDone: false};
@@ -51,9 +44,6 @@ function App() {
     }
   }
 
-  // let [filter, setFilter] = useState<FilterValuesType>("all");
-
-
   function changeFilter(value: FilterValuesType, todoListId: string) {
     // setFilter(value);
     let todoList = todoLists.find(tl => tl.id === todoListId);
@@ -67,8 +57,8 @@ function App() {
   let todoListId2 = v1();
 
   let [todoLists, setTodoLists] = useState<Array<TodoListsType>>([
-    {id: todoListId1, title: "What to learn", filter: 'active'},
-    {id: todoListId2, title: "What to buy", filter: 'completed'},
+    {id: todoListId1, title: "What to learn", filter: 'all'},
+    {id: todoListId2, title: "What to buy", filter: 'all'},
   ])
   let removeTodoList = (todoListId: string) => {
     debugger
@@ -92,8 +82,18 @@ function App() {
     ]
   })
 
+
+  const addTodoList = (title: string) => {
+    let todoList: TodoListsType = {id: v1(), title: title, filter: 'all'};
+    setTodoLists([todoList, ...todoLists]);
+    setTasks({...tasksObj, [todoList.id]: []})
+  }
+
+
   return (
     <div className="App">
+      <AddItemForm addItem={addTodoList}/>
+
       {
         todoLists.map((tl) => {
 

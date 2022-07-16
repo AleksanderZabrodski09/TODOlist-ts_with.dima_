@@ -2,6 +2,9 @@ import React from 'react';
 import {FilterValuesType} from './App';
 import {CheckBox} from './Components/CheckBox';
 import {AddItemForm} from './AddItemForm';
+import {EditableSpan} from './EditableSpan';
+
+
 
 
 export type TaskType = {
@@ -18,8 +21,10 @@ type PropsType = {
   changeFilter: (value: FilterValuesType, todolistId: string) => void
   addTask: (title: string, todoListId: string) => void
   changeCheckBox: (idTask: string, eValue: boolean, todoListId: string) => void
+  changeTaskTitle: (idTask: string, newTitle: string, todoListId: string) => void
   filter: string
   removeTodoList: (todoListId: string) => void
+  changeTodoListTitle: (todoListId: string, newTitle: string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -40,20 +45,29 @@ export function Todolist(props: PropsType) {
   const onChangeCheckBoxHandler = (idTask: string, eValue: boolean, tlID: string) => {
     props.changeCheckBox(idTask, eValue, tlID)
   }
+  const onChangeTitleHandler = (idTask: string, newValue: string, tlID: string) => {
+    props.changeTaskTitle(idTask, newValue, tlID)
+  }
   const removeTodoListHandler = () => {
     props.removeTodoList(props.todoListId)
   }
+  const changeTodoListTitle = (newTitle:string) => {
+    props.changeTodoListTitle(props.todoListId,newTitle)
+  }
 
-  const addTask=(title:string)=>{
+  const addTask = (title: string) => {
     props.addTask(props.todoListId, title)
   }
 
 
+
+
   return <div>
-    <h3>{props.title}
+    <h3>
+      <EditableSpan title={props.title} onChange={changeTodoListTitle}/>
       <button onClick={removeTodoListHandler}>X</button>
     </h3>
-      <AddItemForm  addItem={addTask}/>
+    <AddItemForm addItem={addTask}/>
 
     <ul>
       {
@@ -63,8 +77,7 @@ export function Todolist(props: PropsType) {
             callback={(eValue) => onChangeCheckBoxHandler(t.id, eValue, props.todoListId)}
             // callback={(eValue)=>props.changeCheckBox(t.id, eValue)}
           />
-
-          <span>{t.title}</span>
+          <EditableSpan title={t.title} onChange={(newValue)=>onChangeTitleHandler(t.id,newValue, props.todoListId)}/>
           <button onClick={() => onClickRemoveTaskHandler(props.todoListId, t.id)}>x
           </button>
         </li>)

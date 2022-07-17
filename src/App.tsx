@@ -28,7 +28,7 @@ function App() {
 
 
   function removeTask(id: string, todoListId: string) {
-    debugger
+
     let tasks = tasksObj[todoListId]
     let filteredTasks = tasks.filter(t => t.id !== id);
     tasksObj[todoListId] = filteredTasks;
@@ -44,8 +44,16 @@ function App() {
     }
   }
 
+
+  const onChangeTaskTitle = (idTask: string, newTitle: string, todoListId: string) => {
+
+    setTasks({
+      ...tasksObj,
+      [todoListId]: tasksObj[todoListId].map(el => el.id === idTask ? {...el, title: newTitle} : el)
+    })
+  }
+
   function changeFilter(value: FilterValuesType, todoListId: string) {
-    // setFilter(value);
     let todoList = todoLists.find(tl => tl.id === todoListId);
     if (todoList) {
       todoList.filter = value
@@ -61,7 +69,6 @@ function App() {
     {id: todoListId2, title: "What to buy", filter: 'all'},
   ])
   let removeTodoList = (todoListId: string) => {
-    debugger
     let filteredTodoList = todoLists.filter(tl => tl.id !== todoListId)
     setTodoLists(filteredTodoList);
     delete tasksObj[todoListId];
@@ -114,6 +121,7 @@ function App() {
               changeFilter={changeFilter}
               addTask={addTask}
               changeBox={changeBox}
+              onChangeTaskTitle={onChangeTaskTitle}
               filter={tl.filter}
               removeTodoList={removeTodoList}
             />

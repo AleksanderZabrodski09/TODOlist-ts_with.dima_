@@ -2,6 +2,7 @@ import React from 'react';
 import {FilterValuesType} from './App';
 import {CheckBox} from './Components/checkBox';
 import {AddItemForm} from './AddItemForm';
+import {EditableSpan} from './EditableSpan';
 
 export type TaskType = {
   id: string
@@ -17,6 +18,7 @@ type PropsType = {
   changeFilter: (value: FilterValuesType, todoListId: string) => void
   addTask: (title: string, todoListId: string) => void
   changeBox: (idTask: string, value: boolean, todoListId: string) => void
+  onChangeTaskTitle: (idTask: string, newTitle: string, todoListId: string) => void
   filter: string
   removeTodoList: (todoListId: string) => void
 }
@@ -32,6 +34,9 @@ export function Todolist(props: PropsType) {
 
   const onChangeBoxHandler = (tID: string, eValue: boolean, tlID: string) => {
     props.changeBox(tID, eValue, tlID)
+  }
+  const onChangeTaskTitleHandler = (tID: string, newValue: string, tlID: string) => {
+    props.onChangeTaskTitle(tID, newValue, tlID)
   }
   const onRemoveHandler = (tID: string, tlID: string) => {
     props.removeTask(tID, tlID)
@@ -55,8 +60,8 @@ export function Todolist(props: PropsType) {
                   callBack={(eValue) => onChangeBoxHandler(t.id, eValue, props.id)}
 
                 />
+                <EditableSpan title={t.title} onChange={(newValue)=>onChangeTaskTitleHandler(t.id,newValue,props.id)}/>
 
-                <span>{t.title}</span>
                 <button onClick={() => onRemoveHandler(t.id, props.id)}>x
                 </button>
               </li>

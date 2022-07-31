@@ -1,4 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import {Button} from '@mui/material';
 
 export type AddItemFormType = {
   addItem: (title: string) => void
@@ -37,6 +38,7 @@ export const AddItemForm = (props: AddItemFormType) => {
         className={error ? 'error' : ''}
       />
       <button onClick={addItem}>+</button>
+      {/*<Button onClick={addItem}>+</Button>*/}
       {error && <div className='errorMessage'>{error}</div>}
     </div>
   )

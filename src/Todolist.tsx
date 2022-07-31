@@ -1,8 +1,10 @@
 import React from 'react';
 import {FilterValuesType} from './App';
 import {CheckBox} from './Components/checkBox';
-import {AddItemForm} from './AddItemForm';
+import {AddItemForm} from './Components/AddItemForm';
 import {EditableSpan} from './EditableSpan';
+import {IconButton} from '@mui/material';
+import {Delete} from '@mui/icons-material';
 
 export type TaskType = {
   id: string
@@ -19,21 +21,27 @@ type PropsType = {
   addTask: (title: string, todoListId: string) => void
   changeBox: (idTask: string, value: boolean, todoListId: string) => void
   onChangeTaskTitle: (idTask: string, newTitle: string, todoListId: string) => void
+  changeTodoListTitle: (newTitle: string, todoListId: string) => void
   filter: string
   removeTodoList: (todoListId: string) => void
 }
 
 
 export function Todolist(props: PropsType) {
+
   const addTask=(title:string)=>{
     props.addTask(title,props.id)
   }
+
   const onAllClickHandler = () => props.changeFilter("all", props.id)
   const onActiveClickHandler = () => props.changeFilter("active", props.id)
   const onCompletedClickHandler = () => props.changeFilter("completed", props.id)
 
   const onChangeBoxHandler = (tID: string, eValue: boolean, tlID: string) => {
     props.changeBox(tID, eValue, tlID)
+  }
+  const changeTodoListTitleHandler = (newValue: string) => {
+    props.changeTodoListTitle(newValue, props.id)
   }
   const onChangeTaskTitleHandler = (tID: string, newValue: string, tlID: string) => {
     props.onChangeTaskTitle(tID, newValue, tlID)
@@ -46,7 +54,14 @@ export function Todolist(props: PropsType) {
   }
   return (
     <div>
-     <h3>{props.title}<button onClick={removeTodoList}>X</button></h3>
+     <h3>
+       {/*{props.title}*/}
+       <EditableSpan title={props.title} onChange={changeTodoListTitleHandler}/>
+       <button onClick={removeTodoList}>X</button>
+       {/*<IconButton onClick={removeTodoList}>*/}
+       {/*  <Delete />*/}
+       {/*</IconButton>*/}
+     </h3>
 
       <AddItemForm addItem={addTask}/>
       <ul>

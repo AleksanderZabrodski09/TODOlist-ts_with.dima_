@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
-import {AddItemForm} from './AddItemForm';
-import {type} from 'os';
+import {AddItemForm} from './Components/AddItemForm';
+
 
 export type FilterValuesType = "all" | "active" | "completed";
 type TodoListsType = {
@@ -18,7 +18,7 @@ type TasksObjType = {
 
 function App() {
 
-  const addTask = (title: string, todoListId: string) => {
+  const addTask = (todoListId: string, title: string) => {
     let newTask = {id: v1(), title: title, isDone: false};
     let tasks = tasksObj[todoListId]
     let newTasks = [newTask, ...tasks];
@@ -95,7 +95,10 @@ function App() {
     setTodoLists([todoList, ...todoLists]);
     setTasks({...tasksObj, [todoList.id]: []})
   }
+const changeTodoListTitle=(newTitle: string, todoListId: string)=>{
+  setTodoLists(todoLists.map(tl=> tl.id===todoListId ? {...tl, title:newTitle} :tl))
 
+}
 
   return (
     <div className="App">
@@ -122,6 +125,7 @@ function App() {
               addTask={addTask}
               changeBox={changeBox}
               onChangeTaskTitle={onChangeTaskTitle}
+              changeTodoListTitle={changeTodoListTitle}
               filter={tl.filter}
               removeTodoList={removeTodoList}
             />

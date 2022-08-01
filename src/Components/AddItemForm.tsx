@@ -1,5 +1,6 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button, TextField} from '@material-ui/core';
+import {Button, IconButton, TextField} from '@material-ui/core';
+import {AddCircleOutlineOutlined} from '@material-ui/icons';
 
 type AddItemFormPropsType = {
   addItem: (title: string) => void
@@ -49,7 +50,9 @@ export function AddItemForm(props: AddItemFormPropsType) {
         helperText={error}
       />
       {/*<button onClick={addTaskHandler}>+</button>*/}
-      <Button onClick={addTaskHandler} variant={'contained'} color={'primary'}>+</Button>
+      <IconButton onClick={addTaskHandler}  color={'primary'}>
+        <AddCircleOutlineOutlined color={'inherit'}/>
+      </IconButton>
       {/*{error && <div className='errorMessage'>{error}</div>}*/}
     </div>
   )

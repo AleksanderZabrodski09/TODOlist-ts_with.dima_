@@ -1,7 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from '@mui/material';
-
-
+import {Button, TextField} from '@mui/material';
 
 
 export type AddItemFormType = {
@@ -34,17 +32,22 @@ export const AddItemForm = (props: AddItemFormType) => {
 
   return (
     <div>
-      <input
+
+      <TextField
+        size='small'
         value={newTitle}
         onChange={onChangeHandler}
         onKeyPress={onKeyPressHandler}
         className={error ? 'error' : ''}
-      />
+        id="outlined-basic"
+        label="Type title"
+        variant="outlined"/>
 
-      <Button variant="contained" style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px', background: 'black'}} onClick={addItem}>+</Button>
-
-
+      <Button variant="contained"
+              style={{maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px', background: 'black'}}
+              onClick={addItem}>+</Button>
       {error && <div className='errorMessage'>{error}</div>}
+
     </div>
   )
 }

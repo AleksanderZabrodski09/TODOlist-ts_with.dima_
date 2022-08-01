@@ -18,7 +18,7 @@ type TasksObjType = {
 
 function App() {
 
-  const addTask = (todoListId: string, title: string) => {
+  const addTask = (title: string, todoListId: string) => {
     let newTask = {id: v1(), title: title, isDone: false};
     let tasks = tasksObj[todoListId]
     let newTasks = [newTask, ...tasks];

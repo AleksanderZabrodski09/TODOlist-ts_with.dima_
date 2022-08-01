@@ -28,7 +28,6 @@ export function EditableSpan(props: EditableSpanType) {
       onChange={onChangeTitleHandler}
       onBlur={activateViewMode}
       autoFocus
-      // id="standard-basic"
       variant="standard"
     />
     : <span onDoubleClick={activateEditMode}>{props.title}</span>

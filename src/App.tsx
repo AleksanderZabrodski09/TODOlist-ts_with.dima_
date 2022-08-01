@@ -3,6 +3,7 @@ import './App.css';
 import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './Components/AddItemForm';
+import ButtonAppBar from './Components/ButtonAppBar';
 
 
 export type FilterValuesType = "all" | "active" | "completed";
@@ -102,6 +103,7 @@ const changeTodoListTitle=(newTitle: string, todoListId: string)=>{
 
   return (
     <div className="App">
+      <ButtonAppBar/>
       <AddItemForm addItem={addTodoList}/>
 
       {

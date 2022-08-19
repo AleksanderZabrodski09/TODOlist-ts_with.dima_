@@ -8,7 +8,7 @@ import {
 import {v1} from 'uuid';
 import {FilterValuesType, TodoListsType} from '../App';
 
-test('correct todoList should be removed', () => {
+test.skip('correct todoList should be removed', () => {
   let todoListId1 = v1();
   let todoListId2 = v1();
 
@@ -28,7 +28,7 @@ test('correct todoList should be removed', () => {
 });
 
 
-test('correct todoList should be added', () => {
+test.skip('correct todoList should be added', () => {
   let todoListId1 = v1();
   let todoListId2 = v1();
 
@@ -49,7 +49,7 @@ test('correct todoList should be added', () => {
   expect(endState[2].filter).toBe('all');
 });
 
-test('correct todoList should change its name', () => {
+test.skip('correct todoList should change its name', () => {
   let todoListId1 = v1();
   let todoListId2 = v1();
 
@@ -68,7 +68,7 @@ test('correct todoList should change its name', () => {
   expect(endState[1].title).toBe(newTitle);
 });
 
-test('correct filter of todolist should be changed', () => {
+test.skip('correct filter of todolist should be changed', () => {
   let todoListId1 = v1();
   let todoListId2 = v1();
 

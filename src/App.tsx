@@ -42,9 +42,9 @@ function App() {
     setTasks({...tasksObj})
   }
 
-  function removeTask(todoListId: string, id: string) {
+  function removeTask(todoListId: string, idTask: string) {
     let todoListTasks = tasksObj[todoListId]
-    tasksObj[todoListId] = todoListTasks.filter(t => t.id != id);
+    tasksObj[todoListId] = todoListTasks.filter(t => t.id != idTask);
     setTasks({...tasksObj});
 
   }
@@ -68,7 +68,14 @@ function App() {
 
     setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, title: newTitle} : tl))
   }
+  const addTodoList = (title: string) => {
+    let todoList: TodoListsType = {id: v1(), title: title, filter: 'all'};
+    setTodoLists([todoList, ...todoLists]);
+    setTasks({
+      ...tasksObj, [todoList.id]: []
+    });
 
+  }
 
   let todoListId1 = v1();
   let todoListId2 = v1();
@@ -92,14 +99,7 @@ function App() {
 
   });
 
-  const addTodoList = (title: string) => {
-    let todoList: TodoListsType = {id: v1(), title: title, filter: 'all'};
-    setTodoLists([todoList, ...todoLists]);
-    setTasks({
-      ...tasksObj, [todoList.id]: []
-    });
 
-  }
 
 
   return (

@@ -33,7 +33,7 @@ function AppWithRedux() {
   const dispatch=useDispatch()
 
  const todoLists= useSelector<AppRootState, Array<TodoListsType>>(state => state.todoLists)
- const tasks= useSelector<AppRootState, TaskStateType>(state => state.tasks)
+ const tasksObj= useSelector<AppRootState, TaskStateType>(state => state.tasks)
 
 
   const changeCheckBox = (todoListId: string, idTask: string, eValue: boolean) => {
@@ -85,27 +85,7 @@ function AppWithRedux() {
     // setTodoLists(todoLists.map(tl => tl.id === todoListId ? {...tl, title: newTitle} : tl))
   }
 
-  let todoListId1 = v1();
-  let todoListId2 = v1();
 
-  let [todoLists] = useReducer(todoListsReducer, [
-    {id: todoListId1, title: "What to learn", filter: 'all'},
-    {id: todoListId2, title: "What to buy", filter: 'all'},
-  ])
-  let [tasksObj] = useReducer(tasksReducer, {
-    [todoListId1]: [
-      {id: v1(), title: "HTML&CSS", isDone: true},
-      {id: v1(), title: "JS", isDone: true},
-      {id: v1(), title: "ReactJS", isDone: false},
-      {id: v1(), title: "Rest API", isDone: false},
-      {id: v1(), title: "GraphQL", isDone: false}
-    ],
-    [todoListId2]: [
-      {id: v1(), title: "Book", isDone: true},
-      {id: v1(), title: "Pen", isDone: false}
-    ],
-
-  });
 
 
   return (

@@ -80,8 +80,7 @@ export const tasksReducer = (state: TaskStateType= initialState, action: Actions
       return {...state, [action.todoListId]: []}
     }
     case 'REMOVE-TODOLIST': {
-      // delete tasksObj[todoListId];
-      //     setTasks({...tasksObj})
+
       delete state[action.id]
       return  {...state}
 

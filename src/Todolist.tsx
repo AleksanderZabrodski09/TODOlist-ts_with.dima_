@@ -49,11 +49,11 @@ export const Todolist = React.memo(function (props: PropsType) {
 
   const addTask = useCallback((title: string) => dispatch(addTaskAC(props.todoListId, title)), [props.todoListId])
 
-  const onClickRemoveTaskHandler = useCallback((tID: string, tlID: string) => dispatch(removeTaskAC(tID, tlID)), [dispatch]);
+  const onClickRemoveTaskHandler = useCallback((tID: string, ) => dispatch(removeTaskAC(tID, props.todoListId)), [dispatch]);
 
-  const onChangeTitleHandler = useCallback((tlID: string, idTask: string, newValue: string) => dispatch(changeTaskTitleAC(tlID, idTask, newValue)), [dispatch])
+  const onChangeTitleHandler = useCallback(( idTask: string, newValue: string) => dispatch(changeTaskTitleAC(props.todoListId, idTask, newValue)), [dispatch])
 
-  const onChangeCheckBoxHandler = useCallback((tlID: string, idTask: string, eValue: boolean) => dispatch(changeTaskStatusAC(tlID, idTask, eValue)), [dispatch])
+  const onChangeCheckBoxHandler = useCallback(( idTask: string, eValue: boolean) => dispatch(changeTaskStatusAC(props.todoListId, idTask, eValue)), [dispatch])
 
 
   const onAllClickHandler = useCallback(() => {
@@ -101,7 +101,7 @@ export const Todolist = React.memo(function (props: PropsType) {
             changeTaskStatus={onChangeCheckBoxHandler}
             changeTaskTitle={onChangeTitleHandler}
             task={t}
-            todoListId={props.todoListId}
+            // todoListId={props.todoListId}
           />
         }
 
